@@ -6,6 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +37,14 @@ public class ProductController {
     return productRepository.findByName(name);
   }
 
-  @GetMapping("/findall")
+  /*@GetMapping("/findall")
+  public Flux<ServerSentEvent<Product>> findAll() {
+    return productRepository.findAllProducts().map(data -> ServerSentEvent.<Product>builder().event("product").data(data).build());
+  }*/
+
+  @GetMapping(value = "/findall", produces= MediaType.TEXT_EVENT_STREAM_VALUE)
   public Flux<Product> findAll() {
-    return productRepository.findAllProducts().doOnNext(System.out::println);
+    return productRepository.findAllProducts();
   }
 
   @PostMapping("/save")
