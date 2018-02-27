@@ -47,6 +47,11 @@ public class ProductController {
     return productRepository.findAllProducts();
   }
 
+  @GetMapping(value = "/findbyprice", produces= MediaType.TEXT_EVENT_STREAM_VALUE)
+  public Flux<Product> findByPrice() {
+    return productRepository.findByPriceGreaterThan(10.0);
+  }
+
   @PostMapping("/save")
   public Mono<Product> saveProduct(@RequestBody final Product product) {
     return productRepository.save(product);

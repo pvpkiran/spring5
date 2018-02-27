@@ -15,4 +15,7 @@ public interface ReactiveProductRepository extends ReactiveCrudRepository<Produc
   @Tailable
   @Query("{}")
   Flux<Product> findAllProducts();
+
+  @Tailable
+  Flux<Product> findByPriceGreaterThan(double min);
 }
