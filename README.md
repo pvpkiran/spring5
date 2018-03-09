@@ -4,6 +4,6 @@
 _Prerequisite_  
 
    Make sure you have mongodb running on the host/port mentioned in application.properties. 
-   And create a capped collection in mongo with name **person**   
+   And create a capped collection in mongo with name **product**   
    
    https://docs.mongodb.com/manual/reference/method/db.createCollection/
